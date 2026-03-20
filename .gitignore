@@ -33,6 +33,7 @@ supabase/.temp/
 *.njsproj
 *.sln
 *.sw?
+skills/
 
 .adal/
 .agent/
