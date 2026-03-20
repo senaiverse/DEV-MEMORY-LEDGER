@@ -1,6 +1,6 @@
 import { useTheme } from 'next-themes'
 import { useSyncStatus } from '@/hooks/use-sync-status'
-import { Sun, Moon, Brain } from 'lucide-react'
+import { Sun, Moon, Brain, Zap } from 'lucide-react'
 import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
 import { Tooltip, TooltipTrigger, TooltipContent } from '@/components/ui/tooltip'
@@ -29,6 +29,13 @@ export function Header() {
         <span className="text-lg font-semibold">DevMem AI</span>
       </div>
       <div className="flex items-center gap-3 ml-auto">
+        <Badge
+          variant="outline"
+          className="hidden gap-1.5 border-muted-foreground/30 text-xs text-muted-foreground md:flex"
+        >
+          <Zap className="h-3.5 w-3.5 shrink-0 text-amber-400" />
+          PowerSync AI Hackathon
+        </Badge>
         <Tooltip>
           <TooltipTrigger
             render={

@@ -30,8 +30,15 @@ export function PowerSyncProvider({ children }: { children: ReactNode }) {
 
   if (!ready) {
     return (
-      <div className="flex h-screen items-center justify-center">
-        <div className="text-muted-foreground">Initializing...</div>
+      <div className="flex h-screen flex-col items-center justify-center gap-4 bg-background">
+        <img
+          src="/favicon.svg"
+          alt="DevMem AI"
+          className="h-12 w-12 animate-pulse"
+        />
+        <p className="text-sm text-muted-foreground animate-pulse">
+          Loading DevMem AI...
+        </p>
       </div>
     );
   }

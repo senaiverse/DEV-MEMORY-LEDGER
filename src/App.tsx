@@ -4,6 +4,7 @@ import { Toaster } from '@/components/ui/sonner'
 import { TooltipProvider } from '@/components/ui/tooltip'
 import { PowerSyncProvider } from '@/powersync/provider'
 import { ErrorBoundary } from '@/components/shared/error-boundary'
+import { Analytics } from '@vercel/analytics/react'
 import { AppShell } from '@/components/layout/app-shell'
 import { ProjectsPage } from '@/routes/projects'
 import { ProjectDetailPage } from '@/routes/project-detail'
@@ -36,6 +37,7 @@ export function App() {
               </ErrorBoundary>
             </AppShell>
             <Toaster />
+            <Analytics />
           </BrowserRouter>
         </TooltipProvider>
       </PowerSyncProvider>
