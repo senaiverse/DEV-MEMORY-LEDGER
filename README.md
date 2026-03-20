@@ -7,10 +7,13 @@
 Local-first AI memory for your codebases — captures lessons from docs and commits,\
 recalls them in your IDE, and tracks project health over time.
 
+*by [@senaiverse](https://github.com/senaiverse)*
+
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg?style=flat)](LICENSE)
 [![Built with Supabase](https://img.shields.io/badge/Built%20with-Supabase-3fcf8e?style=flat&logo=supabase&logoColor=white)](https://supabase.com)
 [![Powered by PowerSync](https://img.shields.io/badge/Powered%20by-PowerSync-blue?style=flat)](https://www.powersync.com)
 [![MCP Ready](https://img.shields.io/badge/MCP-Ready-blueviolet?style=flat)](https://modelcontextprotocol.io)
+[![Claude Code](https://img.shields.io/badge/Claude%20Code-Compatible-f97316?style=flat&logo=anthropic&logoColor=white)](https://claude.ai/code)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.9-3178c6?style=flat&logo=typescript&logoColor=white)](https://www.typescriptlang.org)
 
 [Get Started](#quickstart) · [Features](#features) · [Architecture](#architecture) · [MCP Usage](#using-devmem-in-your-ide) · [PowerSync](#powersync--local-first)
@@ -19,22 +22,26 @@ recalls them in your IDE, and tracks project health over time.
 
 ---
 
-## Demo
+## What It Looks Like
 
-<!-- TODO: Replace placeholder paths with actual screenshots -->
+### Lessons & Antipatterns
 
-| Lessons & Antipatterns | Timeline & Focus Areas |
-|:---:|:---:|
-| ![Lessons view](docs/screenshots/lessons.png) | ![Timeline view](docs/screenshots/timeline.png) |
-| Browse captured lessons. Risky patterns are auto-flagged with severity badges. | Select a period and get an AI-generated summary with strong/weak area analysis. |
+Browse all captured lessons in a tabbed project view. Each lesson shows its title, problem, solution, and tags. Lessons flagged as risky patterns display severity badges (`high` / `medium` / `low`) and can be expanded for AI-generated refactor prompts.
 
-| Error Assistant | MCP in Claude Code |
-|:---:|:---:|
-| ![Ask view](docs/screenshots/ask.png) | ![MCP usage](docs/screenshots/mcp.png) |
-| Paste an error and get context from past incidents — similar lessons, root causes, and suggested fixes. | Use DevMem tools directly from your IDE. No context switching. |
+### Timeline & Focus Areas
+
+Pick a time period (24h, 7d, 14d, 30d, 90d, 6mo, 1yr) and get a Gemini-generated summary of improvements. Focus areas highlight which themes are **strong** (green badges) and which **need attention** (amber badges) — across Testing, Security, Performance, Architecture, and more. Summaries are cached for 24 hours.
+
+### Error Assistant (Ask)
+
+Paste an error or stack trace into the Ask page. DevMem performs a RAG search across your knowledge base and returns a contextual answer with **similar past incidents**, **root causes**, and **suggested fix steps** — all sourced from real lessons in your project.
+
+### MCP in Claude Code
+
+From your IDE, ask your agent things like *"Have we seen this error before?"* or *"Save this fix as a lesson."* The MCP server handles it — no browser needed. Tool calls show up inline in your agent's conversation.
 
 > [!NOTE]
-> Screenshots are placeholders. Replace the paths above with actual captures before submission.
+> Replace this section with actual screenshots once available. Drop images into `docs/screenshots/` and reference them here.
 
 ---
 
@@ -205,6 +212,18 @@ Once configured, the agent can use DevMem tools directly:
 ```
 
 After calling `devmem_attach` once, a `.devmemory.json` file is written to your workspace root. All subsequent calls auto-resolve the project — no slug needed.
+
+### MCP Tools Reference
+
+| Tool | Description |
+|------|-------------|
+| `devmem_list_projects` | Discover available projects and their slugs |
+| `devmem_search` | RAG search — question, error, or antipattern mode |
+| `devmem_save_lesson` | Save a structured lesson from a code change or bug fix |
+| `devmem_save_note` | Save a note, guideline, standard, or decision |
+| `devmem_summarize` | Summarize improvements over a time period |
+| `devmem_attach` | Attach the current workspace to a project |
+| `devmem_create_project` | Create a new project in the ledger |
 
 > [!TIP]
 > If the project doesn't exist yet, use `devmem_create_project` to create it first, then `devmem_attach` to link your workspace. See [docs/agent-api.md](docs/agent-api.md) for the full API reference.
